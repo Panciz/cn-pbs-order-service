@@ -3,6 +3,7 @@ kind: Deployment
 metadata:
   name: order-service
   labels:
+    platform: polar-catalog
     app: order-service
 spec:
   replicas: 1
@@ -12,6 +13,7 @@ spec:
   template:
     metadata:
       labels:
+        platform: polar-catalog
         app: order-service
     spec:
       containers:
