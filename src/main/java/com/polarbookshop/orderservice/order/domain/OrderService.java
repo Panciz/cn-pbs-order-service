@@ -22,8 +22,8 @@ public class OrderService {
 		return orderRepository.findAll();
 	}
 
-	public Order getById(int id){
-		return orderRepository.find(id);
+	public Mono<Order> getById(long id){
+		return orderRepository.findById(id);
 	}
 
 	public Mono<Order> submitOrder(String isbn, int quantity) {
@@ -37,7 +37,10 @@ public class OrderService {
 		return Order.of(book.isbn(), book.title() + " - " + book.author(),
 				book.price(), quantity, OrderStatus.ACCEPTED);
 	}
-
+	public static Order buildDispatched(Book book, int quantity) {
+		return Order.of(book.isbn(), book.title() + " - " + book.author(),
+				book.price(), quantity,OrderStatus.valueOf("DISPATCHED"));
+	}
 	public static Order buildRejectedOrder(String bookIsbn, int quantity) {
 		return Order.of(bookIsbn, null, null, quantity, OrderStatus.REJECTED);
 	}
