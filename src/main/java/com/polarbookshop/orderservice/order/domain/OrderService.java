@@ -22,8 +22,8 @@ public class OrderService {
 		return orderRepository.findAll();
 	}
 
-	public Order getById(int id){
-		return orderRepository.find(id);
+	public Mono<Order> getById(long id){
+		return orderRepository.findById(id);
 	}
 
 	public Mono<Order> submitOrder(String isbn, int quantity) {
