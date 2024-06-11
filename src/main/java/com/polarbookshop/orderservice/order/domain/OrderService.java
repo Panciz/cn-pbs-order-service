@@ -22,6 +22,10 @@ public class OrderService {
 		return orderRepository.findAll();
 	}
 
+	public Order getById(int id){
+		return orderRepository.find(id);
+	}
+
 	public Mono<Order> submitOrder(String isbn, int quantity) {
 		return bookClient.getBookByIsbn(isbn)
 				.map(book -> buildAcceptedOrder(book, quantity))
